@@ -1,0 +1,332 @@
+﻿ChangeVolume	change volume on speaker {speaker} to {volume}
+ChangeVolume	change volume in speaker {speaker} to {volume}
+ChangeVolume	change volume on {speaker} to {volume}
+ChangeVolume	change volume in {speaker} to {volume}
+ChangeVolume	change volume to {volume} on speaker {speaker} 
+ChangeVolume	change volume to {volume} in speaker {speaker} 
+ChangeVolume	change volume to {volume} on {speaker} 
+ChangeVolume	change volume to {volume} in {speaker} 
+ChangeVolume	speaker {speaker} volume to {volume}
+ChangeVolume	{speaker} volume to {volume}
+ChangeVolume	speaker {speaker} change volume to {volume}
+ChangeVolume	{speaker} change volume to {volume}
+ChangeVolume	speaker {speaker} volume {volume}
+ChangeVolume	{speaker} volume {volume}
+ChangeVolume	volume {volume} speaker {speaker}
+ChangeVolume	volume {volume} {speaker}
+ChangeVolume	volume {volume} on speaker {speaker}
+ChangeVolume	volume {volume} in speaker {speaker}
+ChangeVolume	volume {volume} on {speaker}
+ChangeVolume	volume {volume} in {speaker}
+
+IncreaseVolume	speaker {speaker} increase volume by {increment}
+IncreaseVolume	{speaker} increase volume by {increment}
+IncreaseVolume	speaker {speaker} increase volume {increment}
+IncreaseVolume	{speaker} increase volume {increment}
+IncreaseVolume	on speaker {speaker} increase volume by {increment}
+IncreaseVolume	in speaker {speaker} increase volume by {increment}
+IncreaseVolume	on {speaker} increase volume by {increment}
+IncreaseVolume	in {speaker} increase volume by {increment}
+IncreaseVolume	on speaker {speaker} increase volume {increment}
+IncreaseVolume	in speaker {speaker} increase volume {increment}
+IncreaseVolume	on {speaker} increase volume {increment}
+IncreaseVolume	in {speaker} increase volume {increment}
+IncreaseVolume 	increase volume by {increment} on speaker {speaker}
+IncreaseVolume 	increase volume by {increment} in speaker {speaker}
+IncreaseVolume 	increase volume by {increment} on {speaker}
+IncreaseVolume 	increase volume by {increment} in {speaker}
+IncreaseVolume 	increase volume {increment} on speaker {speaker}
+IncreaseVolume 	increase volume {increment} in speaker {speaker}
+IncreaseVolume 	increase volume {increment} on {speaker}
+IncreaseVolume 	increase volume {increment} in {speaker}
+IncreaseVolume 	increase volume by {increment} speaker {speaker}
+IncreaseVolume 	increase volume by {increment} {speaker}
+IncreaseVolume 	increase volume {increment} speaker {speaker}
+IncreaseVolume 	increase volume {increment} {speaker}
+IncreaseVolume	speaker {speaker} raise volume by {increment}
+IncreaseVolume	{speaker} raise volume by {increment}
+IncreaseVolume	speaker {speaker} raise volume {increment}
+IncreaseVolume	{speaker} raise volume {increment}
+IncreaseVolume	on speaker {speaker} raise volume by {increment}
+IncreaseVolume	in speaker {speaker} raise volume by {increment}
+IncreaseVolume	on {speaker} raise volume by {increment}
+IncreaseVolume	in {speaker} raise volume by {increment}
+IncreaseVolume	on speaker {speaker} raise volume {increment}
+IncreaseVolume	in speaker {speaker} raise volume {increment}
+IncreaseVolume	on {speaker} raise volume {increment}
+IncreaseVolume	in {speaker} raise volume {increment}
+IncreaseVolume 	raise volume by {increment} on speaker {speaker}
+IncreaseVolume 	raise volume by {increment} in speaker {speaker}
+IncreaseVolume 	raise volume by {increment} on {speaker}
+IncreaseVolume 	raise volume by {increment} in {speaker}
+IncreaseVolume 	raise volume {increment} on speaker {speaker}
+IncreaseVolume 	raise volume {increment} in speaker {speaker}
+IncreaseVolume 	raise volume {increment} on {speaker}
+IncreaseVolume 	raise volume {increment} in {speaker}
+IncreaseVolume 	raise volume by {increment} speaker {speaker}
+IncreaseVolume 	raise volume by {increment} {speaker}
+IncreaseVolume 	raise volume {increment} speaker {speaker}
+IncreaseVolume 	raise volume {increment} {speaker}
+
+DecreaseVolume	speaker {speaker} decrease volume by {increment}
+DecreaseVolume	{speaker} decrease volume by {increment}
+DecreaseVolume	speaker {speaker} decrease volume {increment}
+DecreaseVolume	{speaker} decrease volume {increment}
+DecreaseVolume	on speaker {speaker} decrease volume by {increment}
+DecreaseVolume	in speaker {speaker} decrease volume by {increment}
+DecreaseVolume	on {speaker} decrease volume by {increment}
+DecreaseVolume	in {speaker} decrease volume by {increment}
+DecreaseVolume	on speaker {speaker} decrease volume {increment}
+DecreaseVolume	in speaker {speaker} decrease volume {increment}
+DecreaseVolume	on {speaker} decrease volume {increment}
+DecreaseVolume	in {speaker} decrease volume {increment}
+DecreaseVolume 	decrease volume by {increment} on speaker {speaker}
+DecreaseVolume 	decrease volume by {increment} in speaker {speaker}
+DecreaseVolume 	decrease volume by {increment} on {speaker}
+DecreaseVolume 	decrease volume by {increment} in {speaker}
+DecreaseVolume 	decrease volume {increment} on speaker {speaker}
+DecreaseVolume 	decrease volume {increment} in speaker {speaker}
+DecreaseVolume 	decrease volume {increment} on {speaker}
+DecreaseVolume 	decrease volume {increment} in {speaker}
+DecreaseVolume 	decrease volume by {increment} speaker {speaker}
+DecreaseVolume 	decrease volume by {increment} {speaker}
+DecreaseVolume 	decrease volume {increment} speaker {speaker}
+DecreaseVolume 	decrease volume {increment} {speaker}
+DecreaseVolume	speaker {speaker} lower volume by {increment}
+DecreaseVolume	{speaker} lower volume by {increment}
+DecreaseVolume	speaker {speaker} lower volume {increment}
+DecreaseVolume	{speaker} lower volume {increment}
+DecreaseVolume	on speaker {speaker} lower volume by {increment}
+DecreaseVolume	in speaker {speaker} lower volume by {increment}
+DecreaseVolume	on {speaker} lower volume by {increment}
+DecreaseVolume	in {speaker} lower volume by {increment}
+DecreaseVolume	on speaker {speaker} lower volume {increment}
+DecreaseVolume	in speaker {speaker} lower volume {increment}
+DecreaseVolume	on {speaker} lower volume {increment}
+DecreaseVolume	in {speaker} lower volume {increment}
+DecreaseVolume 	lower volume by {increment} on speaker {speaker}
+DecreaseVolume 	lower volume by {increment} in speaker {speaker}
+DecreaseVolume 	lower volume by {increment} on {speaker}
+DecreaseVolume 	lower volume by {increment} in {speaker}
+DecreaseVolume 	lower volume {increment} on speaker {speaker}
+DecreaseVolume 	lower volume {increment} in speaker {speaker}
+DecreaseVolume 	lower volume {increment} on {speaker}
+DecreaseVolume 	lower volume {increment} in {speaker}
+DecreaseVolume 	lower volume by {increment} speaker {speaker}
+DecreaseVolume 	lower volume by {increment} {speaker}
+DecreaseVolume 	lower volume {increment} speaker {speaker}
+DecreaseVolume 	lower volume {increment} {speaker}
+
+PlayPreset	speaker {speaker} play preset {presetNumber}
+PlayPreset	{speaker} play preset {presetNumber}
+PlayPreset	speaker {speaker} preset {presetNumber}
+PlayPreset	{speaker} preset {presetNumber}
+PlayPreset	preset {presetNumber} on speaker {speaker}
+PlayPreset	preset {presetNumber} in speaker {speaker}
+PlayPreset	preset {presetNumber} on {speaker}
+PlayPreset	preset {presetNumber} in {speaker}
+PlayPreset	preset {presetNumber} speaker {speaker}
+PlayPreset	preset {presetNumber} {speaker}
+PlayPreset	play preset {presetNumber} on speaker {speaker}
+PlayPreset	play preset {presetNumber} in speaker {speaker}
+PlayPreset	play preset {presetNumber} on {speaker}
+PlayPreset	play preset {presetNumber} in {speaker}
+
+SaveCustomPreset speaker {speaker} save now playing as preset {customPresetNumber}
+SaveCustomPreset {speaker} save now playing as preset {customPresetNumber}
+SaveCustomPreset speaker {speaker} save now playing to preset {customPresetNumber}
+SaveCustomPreset {speaker} save now playing to preset {customPresetNumber}
+SaveCustomPreset speaker {speaker} save what's now playing as preset {customPresetNumber}
+SaveCustomPreset {speaker} save what's now playing to preset {customPresetNumber}
+SaveCustomPreset speaker {speaker} save what's now playing as preset {customPresetNumber}
+SaveCustomPreset {speaker} save what's now playing to preset {customPresetNumber}
+SaveCustomPreset speaker {speaker} save what is now playing as preset {customPresetNumber}
+SaveCustomPreset {speaker} save what is now playing to preset {customPresetNumber}
+SaveCustomPreset speaker {speaker} save what is now playing as preset {customPresetNumber}
+SaveCustomPreset {speaker} save what is now playing to preset {customPresetNumber}
+SaveCustomPreset speaker {speaker} save preset {customPresetNumber}
+SaveCustomPreset {speaker} save preset {customPresetNumber}
+SaveCustomPreset speaker {speaker} create preset {customPresetNumber} 
+SaveCustomPreset {speaker} create preset {customPresetNumber} 
+SaveCustomPreset save now playing on speaker {speaker} as preset {customPresetNumber} 
+SaveCustomPreset save now playing in speaker {speaker} as preset {customPresetNumber} 
+SaveCustomPreset save now playing on {speaker} as preset {customPresetNumber} 
+SaveCustomPreset save now playing in {speaker} as preset {customPresetNumber} 
+SaveCustomPreset save now playing on speaker {speaker} to preset {customPresetNumber} 
+SaveCustomPreset save now playing in speaker {speaker} to preset {customPresetNumber} 
+SaveCustomPreset save now playing on {speaker} to preset {customPresetNumber} 
+SaveCustomPreset save now playing in {speaker} to preset {customPresetNumber} 
+SaveCustomPreset save what's now playing on speaker {speaker} as preset {customPresetNumber}
+SaveCustomPreset save what's now playing on {speaker} as preset {customPresetNumber}
+SaveCustomPreset save what's now playing in speaker {speaker} as preset {customPresetNumber}
+SaveCustomPreset save what's now playing in {speaker} as preset {customPresetNumber}
+SaveCustomPreset save what's now playing on speaker {speaker} to preset {customPresetNumber}
+SaveCustomPreset save what's now playing on {speaker} to preset {customPresetNumber}
+SaveCustomPreset save what's now playing in speaker {speaker} to preset {customPresetNumber}
+SaveCustomPreset save what's now playing in {speaker} to preset {customPresetNumber}
+SaveCustomPreset save what is now playing on speaker {speaker} as preset {customPresetNumber}
+SaveCustomPreset save what is now playing in speaker {speaker} as preset {customPresetNumber}
+SaveCustomPreset save what is now playing on {speaker} as preset {customPresetNumber}
+SaveCustomPreset save what is now playing in {speaker} as preset {customPresetNumber}
+SaveCustomPreset save what is now playing on speaker {speaker} to preset {customPresetNumber}
+SaveCustomPreset save what is now playing in speaker {speaker} to preset {customPresetNumber}
+SaveCustomPreset save what is now playing on {speaker} to preset {customPresetNumber}
+SaveCustomPreset save what is now playing in {speaker} to preset {customPresetNumber}
+SaveCustomPreset save preset {customPresetNumber} from speaker {speaker}
+SaveCustomPreset save preset {customPresetNumber} speaker {speaker}
+SaveCustomPreset save preset {customPresetNumber} from {speaker}
+SaveCustomPreset save preset {customPresetNumber} {speaker}
+SaveCustomPreset create preset {customPresetNumber} from speaker {speaker} 
+SaveCustomPreset create preset {customPresetNumber} speaker {speaker} 
+SaveCustomPreset create preset {customPresetNumber} from {speaker} 
+SaveCustomPreset create preset {customPresetNumber} {speaker} 
+
+DescribePreset what is preset {presetNumber}
+DescribePreset what is the description of preset {presetNumber}
+DescribePreset what's preset {presetNumber}
+DescribePreset what's the description of preset {presetNumber}
+DescribePreset describe preset {presetNumber}
+DescribePreset description of preset {presetNumber}
+DescribePreset identify preset {presetNumber}
+DescribePreset preset {preset} is what
+DescribePreset details of preset {presetNumber} 
+DescribePreset describe details of preset {presetNumber} 
+DescribePreset info on preset {presetNumber}
+DescribePreset info for preset {presetNumber}
+DescribePreset info about preset {presetNumber}
+DescribePreset information on preset {presetNumber}
+DescribePreset information for preset {presetNumber}
+DescribePreset information about preset {presetNumber}
+
+PlayEverywhere	speaker {speaker} play everywhere
+PlayEverywhere	{speaker} play everywhere
+PlayEverywhere	play speaker {speaker} everywhere
+PlayEverywhere	play {speaker} everywhere
+PlayEverywhere	play everywhere speaker {speaker}
+PlayEverywhere	play everywhere {speaker}
+PlayEverywhere	play speaker {speaker} on all speakers
+PlayEverywhere	play {speaker} on all speakers
+PlayEverywhere	speaker {speaker} on all speakers
+PlayEverywhere	{speaker} on all speakers
+PlayEverywhere	play speaker {speaker} to all speakers
+PlayEverywhere	play {speaker} to all speakers
+PlayEverywhere	speaker {speaker} to all speakers
+PlayEverywhere	{speaker} to all speakers
+
+StopSpeaker	speaker {speaker} stop
+StopSpeaker	{speaker} stop
+StopSpeaker stop speaker {speaker}
+StopSpeaker stop {speaker}
+
+PowerOn turn on speaker {speaker}
+PowerOn turn on {speaker}
+PowerOn speaker {speaker} on
+PowerOn {speaker} on
+PowerOn speaker {speaker} power on
+PowerOn {speaker} power on
+PowerOn turn speaker {speaker} on
+PowerOn turn {speaker} on
+
+PowerOff turn off speaker {speaker}
+PowerOff turn off {speaker}
+PowerOff speaker {speaker} off
+PowerOff {speaker} off
+PowerOff speaker {speaker} power off
+PowerOff {speaker} power off
+PowerOff turn speaker {speaker} off
+PowerOff turn {speaker} off
+
+DescribeNowPlaying what's now playing on speaker {speaker}
+DescribeNowPlaying what is now playing on speaker {speaker}
+DescribeNowPlaying what is playing on speaker {speaker}
+DescribeNowPlaying what's playing on speaker {speaker}
+DescribeNowPlaying what song is playing on speaker {speaker}
+DescribeNowPlaying what's now playing in speaker {speaker}
+DescribeNowPlaying what is now playing in speaker {speaker}
+DescribeNowPlaying what is playing in speaker {speaker}
+DescribeNowPlaying what's playing in speaker {speaker}
+DescribeNowPlaying what song is playing in speaker {speaker}
+DescribeNowPlaying speaker {speaker} what is this
+DescribeNowPlaying speaker {speaker} what's this
+DescribeNowPlaying speaker {speaker} what song is this
+DescribeNowPlaying speaker {speaker} what is playing
+DescribeNowPlaying speaker {speaker} what's playing
+DescribeNowPlaying describe what's playing on speaker {speaker}
+DescribeNowPlaying describe what is playing on speaker {speaker}
+DescribeNowPlaying describe current song on speaker {speaker}
+DescribeNowPlaying describe current song in speaker {speaker}
+DescribeNowPlaying speaker {speaker} describe current song
+DescribeNowPlaying describe what's playing on {speaker}
+DescribeNowPlaying describe what is playing on {speaker}
+DescribeNowPlaying describe current song on {speaker}
+DescribeNowPlaying describe current song in {speaker}
+DescribeNowPlaying {speaker} describe current song
+
+DescribeVolume what is the current volume in {speaker}
+DescribeVolume what is the current volume on {speaker}
+DescribeVolume what is the current volume of {speaker}
+DescribeVolume what is the volume in {speaker}
+DescribeVolume what is the volume on {speaker}
+DescribeVolume what is the volume of {speaker}
+DescribeVolume what is the current volume in speaker {speaker}
+DescribeVolume what is the current volume on speaker {speaker}
+DescribeVolume what is the current volume of speaker {speaker}
+DescribeVolume what is the volume in speaker {speaker}
+DescribeVolume what is the volume on speaker {speaker}
+DescribeVolume what is the volume of speaker {speaker}
+DescribeVolume what's the current volume in {speaker}
+DescribeVolume what's the current volume on {speaker}
+DescribeVolume what's the current volume of {speaker}
+DescribeVolume what's the volume in {speaker}
+DescribeVolume what's the volume on {speaker}
+DescribeVolume what's the volume of {speaker}
+DescribeVolume what's the current volume in speaker {speaker}
+DescribeVolume what's the current volume on speaker {speaker}
+DescribeVolume what's the current volume of speaker {speaker}
+DescribeVolume what's the volume in speaker {speaker}
+DescribeVolume what's the volume on speaker {speaker}
+DescribeVolume what's the volume of speaker {speaker}
+DescribeVolume current volume on {speaker}
+DescribeVolume current volume in {speaker}
+DescribeVolume current volume of {speaker}
+DescribeVolume current volume on speaker {speaker}
+DescribeVolume current volume in speaker {speaker}
+DescribeVolume current volume of speaker {speaker}
+DescribeVolume volume on {speaker}
+DescribeVolume volume in {speaker}
+DescribeVolume volume of {speaker}
+DescribeVolume volume on speaker {speaker}
+DescribeVolume volume in speaker {speaker}
+DescribeVolume volume of speaker {speaker}
+DescribeVolume {speaker} volume
+DescribeVolume {speaker} current volume
+DescribeVolume speaker {speaker} volume
+DescribeVolume speaker {speaker} current volume
+
+DescribeSpeakerStatus what is status on {speaker}
+DescribeSpeakerStatus what is status in {speaker}
+DescribeSpeakerStatus what is status of {speaker}
+DescribeSpeakerStatus what's status on {speaker}
+DescribeSpeakerStatus what's status in {speaker}
+DescribeSpeakerStatus what's status of {speaker}
+DescribeSpeakerStatus what is the status on {speaker}
+DescribeSpeakerStatus what is the status in {speaker}
+DescribeSpeakerStatus what is the status of {speaker}
+DescribeSpeakerStatus what's the status on {speaker}
+DescribeSpeakerStatus what's the status in {speaker}
+DescribeSpeakerStatus what's the status of {speaker}
+DescribeSpeakerStatus status of {speaker}
+DescribeSpeakerStatus status on {speaker}
+DescribeSpeakerStatus status in {speaker}
+DescribeSpeakerStatus status {speaker}
+DescribeSpeakerStatus {speaker} status
+DescribeSpeakerStatus speaker {speaker} status
+
+implement intent to ask status (repeat on, shuffle on)
+implement intent to like track
+implement intent to unlike track
+intent to name custom preset item name
+intent to add speaker to zone
+intent to remove speaker from zone
+intent use bluetooth
+intent use aux in

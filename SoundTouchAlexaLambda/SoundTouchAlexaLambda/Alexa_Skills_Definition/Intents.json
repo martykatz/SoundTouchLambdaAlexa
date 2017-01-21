@@ -1,0 +1,129 @@
+﻿{
+    "intents": [
+        {
+            "intent": "ChangeVolume",
+            "slots": [
+                {
+                    "name": "speaker",
+                    "type": "SPEAKER_NAME"
+                },
+                {
+                    "name": "volume",
+                    "type": "AMAZON.NUMBER"
+                }
+            ]
+        },
+        {
+            "intent": "IncreaseVolume",
+            "slots": [
+                {
+                    "name": "speaker",
+                    "type": "SPEAKER_NAME"
+                },
+                {
+                    "name": "increment",
+                    "type": "AMAZON.NUMBER"
+                }
+            ]
+        },
+        {
+            "intent": "DecreaseVolume",
+            "slots": [
+                {
+                    "name": "speaker",
+                    "type": "SPEAKER_NAME"
+                },
+                {
+                    "name": "increment",
+                    "type": "AMAZON.NUMBER"
+                }
+            ]
+        },
+        {
+            "intent": "PlayPreset",
+            "slots": [
+                {
+                    "name": "speaker",
+                    "type": "SPEAKER_NAME"
+                },
+                {
+                    "name": "presetNumber",
+                    "type": "AMAZON.NUMBER"
+                }
+            ]
+        },
+        {
+            "intent": "SaveCustomPreset",
+            "slots": [
+                {
+                    "name": "speaker",
+                    "type": "SPEAKER_NAME"
+                },
+                {
+                    "name": "customPresetNumber",
+                    "type": "AMAZON.NUMBER"
+                }
+            ]
+        },
+        {
+            "intent": "PlayEverywhere",
+            "slots": [
+                {
+                    "name": "speaker",
+                    "type": "SPEAKER_NAME"
+                }
+            ]
+        },
+        {
+            "intent": "StopSpeaker",
+            "slots": [
+                {
+                    "name": "speaker",
+                    "type": "SPEAKER_NAME"
+                }
+            ]
+        },
+        {
+            "intent": "PowerOn",
+            "slots": [
+                {
+                    "name": "speaker",
+                    "type": "SPEAKER_NAME"
+                }
+            ]
+        },
+        {
+            "intent": "PowerOff",
+            "slots": [
+                {
+                    "name": "speaker",
+                    "type": "SPEAKER_NAME"
+                }
+            ]
+        },
+        {
+            "intent": "DescribeNowPlaying",
+            "slots": [
+                {
+                    "name": "speaker",
+                    "type": "SPEAKER_NAME"
+                }
+            ]
+        },
+        {
+            "intent": "DescribePreset",
+            "slots": [
+                {
+                    "name": "speaker",
+                    "type": "SPEAKER_NAME"
+                },
+                {
+                    "name": "presetNumber",
+                    "type": "AMAZON.NUMBER"
+                }
+            ]
+        }
+
+
+    ]
+}
