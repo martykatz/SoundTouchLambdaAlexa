@@ -19,7 +19,7 @@ using Amazon.DynamoDBv2.DocumentModel;
 // Assembly attribute to enable the Lambda function's JSON input to be converted into a .NET class.
 [assembly: LambdaSerializerAttribute(typeof(Amazon.Lambda.Serialization.Json.JsonSerializer))]
 
-namespace SoundTouchLambdaAlexa
+namespace SoundTouchAlexaLambda
 {
 
 
@@ -33,6 +33,7 @@ namespace SoundTouchLambdaAlexa
     }
     public class Function
     {
+/*
         static HttpClient httpClient;// = new HttpClient();
         static List<SoundTouchSpeakerMetaData> speakers;
 
@@ -42,10 +43,11 @@ namespace SoundTouchLambdaAlexa
 
             //System.Environment.GetEnvironmentVariable("SpeakerMetaData")
         }
-
-        private static void GetSpeakerMetaData(ILambdaLogger log)
+*/
+        private static List<SoundTouchSpeakerMetaData> GetSpeakerMetaData(ILambdaLogger log)
         {
             log.LogLine("in speaker metadata function");
+            List<SoundTouchSpeakerMetaData> speakers;
             var client = new AmazonDynamoDBClient();
             var table = Table.LoadTable(client, "SoundTouchSpeakers");
             ScanOperationConfig config = new ScanOperationConfig()
@@ -59,10 +61,7 @@ namespace SoundTouchLambdaAlexa
 
             List<Document> documents;
 
-            if (speakers == null)
-            {
-                speakers = new List<SoundTouchSpeakerMetaData>();
-            }
+            speakers = new List<SoundTouchSpeakerMetaData>();
 
             do
             {
@@ -75,6 +74,8 @@ namespace SoundTouchLambdaAlexa
                 }
 
             } while (!search.IsDone);
+
+            return speakers;
         }
 
         private async Task<string> GetPresetItemName(SoundTouchSpeakerMetaData targetSpeaker, int presetNumber, ILambdaLogger log)
@@ -82,7 +83,7 @@ namespace SoundTouchLambdaAlexa
             log.LogLine($"Getting Item Name for speaker {targetSpeaker.SpeakerName}, preset {presetNumber}");
             if (presetNumber >= 1 && presetNumber <= 6)
             {
-                ResetHttpClient(targetSpeaker);
+                HttpClient httpClient = GetHttpClient(targetSpeaker);
 
                 string action = "presets";
                 string presetsResponse = await httpClient.GetStringAsync(action);
@@ -121,21 +122,56 @@ namespace SoundTouchLambdaAlexa
         }
         private async Task<string> GetNowPlayingContentItemName(SoundTouchSpeakerMetaData targetSpeaker, ILambdaLogger log)
         {
-            ResetHttpClient(targetSpeaker);
+            log.LogLine($"entering GetNowPlayingContentItemName for target speaker {targetSpeaker.SpeakerName}");
+            HttpClient httpClient = GetHttpClient(targetSpeaker);
+            log.LogLine($"entering GetNowPlayingContentItemName {httpClient.BaseAddress}");
+            log.LogLine("entering GetNowPlayingContentItemName -1");
 
             string action = "now_playing";
+            log.LogLine("entering GetNowPlayingContentItemName -2");
             string nowPlayingResponse = await httpClient.GetStringAsync(action);
+            log.LogLine("entering GetNowPlayingContentItemName -3");
             log.LogLine("get item name nowPlayingResponse=" + nowPlayingResponse);
-            var x = System.Xml.Linq.XDocument.Parse(nowPlayingResponse);
+            log.LogLine("entering GetNowPlayingContentItemName 0");
+            System.Xml.Linq.XDocument x = new System.Xml.Linq.XDocument();
+            log.LogLine("entering GetNowPlayingContentItemName 0.1");
+
+            try
+            {
+                x = System.Xml.Linq.XDocument.Parse(nowPlayingResponse);
+            }
+            catch(Exception ex)
+            {
+                log.LogLine($"ex message {ex.Message}");
+                log.LogLine($"ex stacktrace {ex.StackTrace}");
+            }
+            
+            log.LogLine("entering GetNowPlayingContentItemName 1");
+
             var k = from t in x.Descendants("ContentItem") select t;
+            log.LogLine("entering GetNowPlayingContentItemName 2");
+
             var contentItemNode = k.First();
+
+            if (contentItemNode.Attributes().Where(y=>y.Name == "source").First().Value.ToLower() == "standby")
+            {
+                return "nothing";
+            }
+            log.LogLine("entering GetNowPlayingContentItemName 3");
+
             contentItemNode.Attribute("isPresetable").Remove();
-            return contentItemNode.Descendants().Where(y => y.Name == "itemName").First().Value;
+            log.LogLine("entering GetNowPlayingContentItemName 4");
+
+            string result = contentItemNode.Descendants().Where(y => y.Name == "itemName").First().Value;
+            log.LogLine("entering GetNowPlayingContentItemName 5");
+            log.LogLine($"entering GetNowPlayingContentItemName {result}");
+
+            return result;
         }
 
         private async Task<string> GetNowPlayingContentItem(SoundTouchSpeakerMetaData targetSpeaker, ILambdaLogger log)
         {
-            ResetHttpClient(targetSpeaker);
+            HttpClient httpClient = GetHttpClient(targetSpeaker);
 
             string action = "now_playing";
             string nowPlayingResponse = await httpClient.GetStringAsync(action);
@@ -159,7 +195,7 @@ namespace SoundTouchLambdaAlexa
         private void SetNowPlayingContentItem(SoundTouchSpeakerMetaData targetSpeaker, string contentItemXML, ILambdaLogger log)
         {
             log.LogLine($"on speaker {targetSpeaker.SpeakerName} selecting XML {contentItemXML}");
-            ResetHttpClient(targetSpeaker);
+            HttpClient httpClient = GetHttpClient(targetSpeaker);
 
             string action = "select";
             //volume = Convert.ToInt32(input.Request.Intent.Slots["volume"].Value);
@@ -240,7 +276,7 @@ namespace SoundTouchLambdaAlexa
 
             //<?xml version="1.0" encoding="UTF-8" ?><nowPlaying deviceID="689E194B6EF6" source="STANDBY"><ContentItem source="STANDBY" isPresetable="true" /></nowPlaying>
 
-            ResetHttpClient(targetSpeaker);
+            HttpClient httpClient = GetHttpClient(targetSpeaker);
 
             string action = "now_playing";
             string volumeInfoResponse = await httpClient.GetStringAsync(action);
@@ -250,17 +286,18 @@ namespace SoundTouchLambdaAlexa
             return !(k.First() == "STANDBY");
 
         }
-        private void ResetHttpClient(SoundTouchSpeakerMetaData targetSpeaker)
+        private HttpClient GetHttpClient(SoundTouchSpeakerMetaData targetSpeaker)
         {
-            httpClient = new HttpClient();
+            HttpClient httpClient = new HttpClient();
             //string URL = String.Format(baseURL, speakerNumber);
             string URL = targetSpeaker.SpeakerURLToAPIEndPoint;
             httpClient.BaseAddress = new Uri(URL);
+            return httpClient;
 
         }
         private async Task<int> GetCurrentVolume(SoundTouchSpeakerMetaData targetSpeaker, ILambdaLogger log)
         {
-            ResetHttpClient(targetSpeaker);
+            HttpClient httpClient = GetHttpClient(targetSpeaker);
 
             string action = "volume";
             string volumeInfoResponse = await httpClient.GetStringAsync(action);
@@ -272,7 +309,7 @@ namespace SoundTouchLambdaAlexa
 
         private void SetVolume(SoundTouchSpeakerMetaData targetSpeaker, int volume)
         {
-            ResetHttpClient(targetSpeaker);
+            HttpClient httpClient = GetHttpClient(targetSpeaker);
 
             string action = "volume";
             //volume = Convert.ToInt32(input.Request.Intent.Slots["volume"].Value);
@@ -289,7 +326,7 @@ namespace SoundTouchLambdaAlexa
 
         private void IncrementVolume(SoundTouchSpeakerMetaData targetSpeaker, int increment, ILambdaLogger log)
         {
-            ResetHttpClient(targetSpeaker);
+            HttpClient httpClient = GetHttpClient(targetSpeaker);
 
             Task<int> volumeTask = GetCurrentVolume(targetSpeaker, log);
             //volumeTask.Start();
@@ -309,7 +346,7 @@ namespace SoundTouchLambdaAlexa
 
         private void PressAndReleaseKey(SoundTouchSpeakerMetaData targetSpeaker, string keyName)
         {
-            ResetHttpClient(targetSpeaker);
+            HttpClient httpClient = GetHttpClient(targetSpeaker);
 
             string action = "key";
             //string URL = String.Format(baseURL, speakerNumber);
@@ -330,9 +367,9 @@ namespace SoundTouchLambdaAlexa
 
         }
 
-        private void PlayEverywhere(SoundTouchSpeakerMetaData targetSpeaker)
+        private void PlayEverywhere(SoundTouchSpeakerMetaData targetSpeaker, IEnumerable<SoundTouchSpeakerMetaData> speakers)
         {
-            ResetHttpClient(targetSpeaker);
+            HttpClient httpClient = GetHttpClient(targetSpeaker);
 
             //int speakerIndexNumber = speakerNumber - 1;
             StringBuilder xmlBuilder = new StringBuilder("");
@@ -357,7 +394,7 @@ namespace SoundTouchLambdaAlexa
         private async Task<IEnumerable<string>> GetStatus(SoundTouchSpeakerMetaData targetSpeaker, ILambdaLogger log)
         {
             List<string> statusStrings = new List<string>();
-            ResetHttpClient(targetSpeaker);
+            HttpClient httpClient = GetHttpClient(targetSpeaker);
 
             string action = "now_playing";
             string nowPlayingResponseString = await httpClient.GetStringAsync(action);
@@ -403,7 +440,7 @@ namespace SoundTouchLambdaAlexa
                                 sourceString = "You Pea N Pea";
                                 break;
                             case "STORED_MUSIC":
-                                ResetHttpClient(targetSpeaker);
+                                httpClient = GetHttpClient(targetSpeaker);
                                 action = "sources";
                                 string sourcesResponseString = await httpClient.GetStringAsync(action);
                                 //TODO
@@ -479,9 +516,11 @@ namespace SoundTouchLambdaAlexa
             IOutputSpeech innerResponse = null;
             var log = context.Logger;
 
+            log.LogLine("FUNCTION EXECUTION BEGINS!");
+
             log.LogLine("speaker metadata about to retrieve!");
 
-            GetSpeakerMetaData(log);
+            List<SoundTouchSpeakerMetaData> speakers = GetSpeakerMetaData(log);
             log.LogLine($"speaker metadata retrieved! count= {speakers.Count()}");
             /*
             foreach (var speaker in speakers)
@@ -498,6 +537,7 @@ namespace SoundTouchLambdaAlexa
             }
             else if (input.GetRequestType() == typeof(Slight.Alexa.Framework.Models.Requests.RequestTypes.ISessionEndedRequest))
             {
+                log.LogLine("REQUEST TO END SESSION RECEIVED!");
                 DeleteSession(input.Session.SessionId);
             }
             else if (input.GetRequestType() == typeof(Slight.Alexa.Framework.Models.Requests.RequestTypes.IIntentRequest))
@@ -507,7 +547,7 @@ namespace SoundTouchLambdaAlexa
                 log.LogLine($"Intent Requested {input.Request.Intent.Name}");
 
 
-                log.LogLine("speaker number string came through as:" + input.Request.Intent.Slots["speaker"].Value);
+                log.LogLine("speaker name string came through as:" + input.Request.Intent.Slots["speaker"].Value);
 
                 string targetSpeakerName = input.Request.Intent.Slots["speaker"].Value;
                 IEnumerable<SoundTouchSpeakerMetaData> candidateSpeakers = speakers.Where(x => x.SpeakerName.ToLower() == targetSpeakerName.ToLower());
@@ -608,7 +648,7 @@ namespace SoundTouchLambdaAlexa
                         log.LogLine($"Playing {targetSpeaker.SpeakerName} everywhere");
                         innerResponse = new PlainTextOutputSpeech();
                         (innerResponse as PlainTextOutputSpeech).Text = $"Okay.  Playing speaker {targetSpeaker.SpeakerName} everywhere";
-                        PlayEverywhere(targetSpeaker);
+                        PlayEverywhere(targetSpeaker, speakers);
                         break;
                     case "PowerOn":
                         SetSpeakerPower(targetSpeaker, true, log);
@@ -639,8 +679,11 @@ namespace SoundTouchLambdaAlexa
                         }
                         break;
                     case "DescribeNowPlaying":
+                        Task<string> nowPlayingResultTask = GetNowPlayingContentItemName(targetSpeaker, log);
+                        nowPlayingResultTask.Wait();
+                        string nowPlayingResult = nowPlayingResultTask.Result;
                         innerResponse = new PlainTextOutputSpeech();
-                        (innerResponse as PlainTextOutputSpeech).Text = $"Speaker {targetSpeaker.SpeakerName} is playing " + GetNowPlayingContentItemName(targetSpeaker, log);
+                        (innerResponse as PlainTextOutputSpeech).Text = $"Speaker {targetSpeaker.SpeakerName} is playing {nowPlayingResult}";
                         break;
                     case "DescribePreset":
                         presetNumber = Convert.ToInt32(input.Request.Intent.Slots["presetNumber"].Value);

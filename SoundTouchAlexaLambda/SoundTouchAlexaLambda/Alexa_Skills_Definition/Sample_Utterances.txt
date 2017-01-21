@@ -188,7 +188,7 @@ DescribePreset what's the description of preset {presetNumber}
 DescribePreset describe preset {presetNumber}
 DescribePreset description of preset {presetNumber}
 DescribePreset identify preset {presetNumber}
-DescribePreset preset {preset} is what
+DescribePreset preset {presetNumber} is what
 DescribePreset details of preset {presetNumber} 
 DescribePreset describe details of preset {presetNumber} 
 DescribePreset info on preset {presetNumber}
