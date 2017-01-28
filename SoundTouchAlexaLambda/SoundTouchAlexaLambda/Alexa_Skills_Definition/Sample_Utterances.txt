@@ -6,6 +6,14 @@ ChangeVolume	change volume to {volume} on speaker {speaker}
 ChangeVolume	change volume to {volume} in speaker {speaker} 
 ChangeVolume	change volume to {volume} on {speaker} 
 ChangeVolume	change volume to {volume} in {speaker} 
+ChangeVolume	change volume speaker {speaker} to {volume}
+ChangeVolume	change volume {speaker} to {volume}
+ChangeVolume	change volume {volume} on speaker {speaker} 
+ChangeVolume	change volume {volume} in speaker {speaker} 
+ChangeVolume	change volume {volume} on {speaker} 
+ChangeVolume	change volume {volume} in {speaker} 
+ChangeVolume	change volume {volume} {speaker} 
+ChangeVolume	change volume {volume} {speaker} 
 ChangeVolume	speaker {speaker} volume to {volume}
 ChangeVolume	{speaker} volume to {volume}
 ChangeVolume	speaker {speaker} change volume to {volume}
@@ -46,7 +54,9 @@ IncreaseVolume 	increase volume {increment} {speaker}
 IncreaseVolume	speaker {speaker} raise volume by {increment}
 IncreaseVolume	{speaker} raise volume by {increment}
 IncreaseVolume	speaker {speaker} raise volume {increment}
+IncreaseVolume	speaker {speaker} raise volume by {increment}
 IncreaseVolume	{speaker} raise volume {increment}
+
 IncreaseVolume	on speaker {speaker} raise volume by {increment}
 IncreaseVolume	in speaker {speaker} raise volume by {increment}
 IncreaseVolume	on {speaker} raise volume by {increment}
@@ -179,7 +189,56 @@ SaveCustomPreset save preset {customPresetNumber} {speaker}
 SaveCustomPreset create preset {customPresetNumber} from speaker {speaker} 
 SaveCustomPreset create preset {customPresetNumber} speaker {speaker} 
 SaveCustomPreset create preset {customPresetNumber} from {speaker} 
-SaveCustomPreset create preset {customPresetNumber} {speaker} 
+SaveCustomPreset create preset {customPresetNumber} {speaker}
+
+SaveCustomPreset speaker {speaker} save now playing as preset number {customPresetNumber}
+SaveCustomPreset {speaker} save now playing as preset number {customPresetNumber}
+SaveCustomPreset speaker {speaker} save now playing to preset number {customPresetNumber}
+SaveCustomPreset {speaker} save now playing to preset number {customPresetNumber}
+SaveCustomPreset speaker {speaker} save what's now playing as preset number {customPresetNumber}
+SaveCustomPreset {speaker} save what's now playing to preset number {customPresetNumber}
+SaveCustomPreset speaker {speaker} save what's now playing as preset number {customPresetNumber}
+SaveCustomPreset {speaker} save what's now playing to preset number {customPresetNumber}
+SaveCustomPreset speaker {speaker} save what is now playing as preset number {customPresetNumber}
+SaveCustomPreset {speaker} save what is now playing to preset number {customPresetNumber}
+SaveCustomPreset speaker {speaker} save what is now playing as preset number {customPresetNumber}
+SaveCustomPreset {speaker} save what is now playing to preset number {customPresetNumber}
+SaveCustomPreset speaker {speaker} save preset number {customPresetNumber}
+SaveCustomPreset {speaker} save preset number {customPresetNumber}
+SaveCustomPreset speaker {speaker} create preset number {customPresetNumber} 
+SaveCustomPreset {speaker} create preset number {customPresetNumber} 
+SaveCustomPreset save now playing on speaker {speaker} as preset number {customPresetNumber} 
+SaveCustomPreset save now playing in speaker {speaker} as preset number {customPresetNumber} 
+SaveCustomPreset save now playing on {speaker} as preset number {customPresetNumber} 
+SaveCustomPreset save now playing in {speaker} as preset number {customPresetNumber} 
+SaveCustomPreset save now playing on speaker {speaker} to preset number {customPresetNumber} 
+SaveCustomPreset save now playing in speaker {speaker} to preset number {customPresetNumber} 
+SaveCustomPreset save now playing on {speaker} to preset number {customPresetNumber} 
+SaveCustomPreset save now playing in {speaker} to preset number {customPresetNumber} 
+SaveCustomPreset save what's now playing on speaker {speaker} as preset number {customPresetNumber}
+SaveCustomPreset save what's now playing on {speaker} as preset number {customPresetNumber}
+SaveCustomPreset save what's now playing in speaker {speaker} as preset number {customPresetNumber}
+SaveCustomPreset save what's now playing in {speaker} as preset number {customPresetNumber}
+SaveCustomPreset save what's now playing on speaker {speaker} to preset number {customPresetNumber}
+SaveCustomPreset save what's now playing on {speaker} to preset number {customPresetNumber}
+SaveCustomPreset save what's now playing in speaker {speaker} to preset number {customPresetNumber}
+SaveCustomPreset save what's now playing in {speaker} to preset number {customPresetNumber}
+SaveCustomPreset save what is now playing on speaker {speaker} as preset number {customPresetNumber}
+SaveCustomPreset save what is now playing in speaker {speaker} as preset number {customPresetNumber}
+SaveCustomPreset save what is now playing on {speaker} as preset number {customPresetNumber}
+SaveCustomPreset save what is now playing in {speaker} as preset number {customPresetNumber}
+SaveCustomPreset save what is now playing on speaker {speaker} to preset number {customPresetNumber}
+SaveCustomPreset save what is now playing in speaker {speaker} to preset number {customPresetNumber}
+SaveCustomPreset save what is now playing on {speaker} to preset number {customPresetNumber}
+SaveCustomPreset save what is now playing in {speaker} to preset number {customPresetNumber}
+SaveCustomPreset save preset number {customPresetNumber} from speaker {speaker}
+SaveCustomPreset save preset number {customPresetNumber} speaker {speaker}
+SaveCustomPreset save preset number {customPresetNumber} from {speaker}
+SaveCustomPreset save preset number {customPresetNumber} {speaker}
+SaveCustomPreset create preset number {customPresetNumber} from speaker {speaker} 
+SaveCustomPreset create preset number {customPresetNumber} speaker {speaker} 
+SaveCustomPreset create preset number {customPresetNumber} from {speaker} 
+SaveCustomPreset create preset number {customPresetNumber} {speaker}  
 
 DescribePreset what is preset {presetNumber}
 DescribePreset what is the description of preset {presetNumber}
@@ -322,11 +381,127 @@ DescribeSpeakerStatus status {speaker}
 DescribeSpeakerStatus {speaker} status
 DescribeSpeakerStatus speaker {speaker} status
 
-implement intent to ask status (repeat on, shuffle on)
-implement intent to like track
-implement intent to unlike track
+LikeTrack	speaker {speaker} like track
+LikeTrack	speaker {speaker} like song
+LikeTrack	speaker {speaker} like
+LikeTrack	{speaker} like track
+LikeTrack	{speaker} like song
+LikeTrack	{speaker} like
+LikeTrack	like song on speaker {speaker}
+LikeTrack	like song in speaker {speaker}
+LikeTrack	like song on {speaker}
+LikeTrack	like song in {speaker}
+LikeTrack	like track on speaker {speaker}
+LikeTrack	like track in speaker {speaker}
+LikeTrack	like track on {speaker}
+LikeTrack	like track in {speaker}
+LikeTrack	like song playing on speaker {speaker}
+LikeTrack	like song playing in speaker {speaker}
+LikeTrack	like song playing on {speaker}
+LikeTrack	like song playing in {speaker}
+LikeTrack	like track playing on speaker {speaker}
+LikeTrack	like track playing in speaker {speaker}
+LikeTrack	like track playing on {speaker}
+LikeTrack	like track playing in {speaker}
+LikeTrack	speaker {speaker} thumbs up track
+LikeTrack	speaker {speaker} thumbs up song
+LikeTrack	speaker {speaker} thumbs up
+LikeTrack	{speaker} thumbs up track
+LikeTrack	{speaker} thumbs up song
+LikeTrack	{speaker} thumbs up
+LikeTrack	thumbs up track playing on speaker {speaker}
+LikeTrack	thumbs up track playing in speaker {speaker}
+LikeTrack	thumbs up track playing on {speaker}
+LikeTrack	thumbs up track playing in {speaker}
+LikeTrack	thumbs up to track playing on speaker {speaker}
+LikeTrack	thumbs up to track playing in speaker {speaker}
+LikeTrack	thumbs up to track playing on {speaker}
+LikeTrack	thumbs up to track playing in {speaker}
+LikeTrack	thumbs up song playing on speaker {speaker}
+LikeTrack	thumbs up song playing in speaker {speaker}
+LikeTrack	thumbs up song playing on {speaker}
+LikeTrack	thumbs up song playing in {speaker}
+LikeTrack	thumbs up to song playing on speaker {speaker}
+LikeTrack	thumbs up to song playing in speaker {speaker}
+LikeTrack	thumbs up to song playing on {speaker}
+LikeTrack	thumbs up to song playing in {speaker}
+
+UnlikeTrack	speaker {speaker} unlike track
+UnlikeTrack	speaker {speaker} unlike song
+UnlikeTrack	speaker {speaker} unlike
+UnlikeTrack	{speaker} unlike track
+UnlikeTrack	{speaker} unlike song
+UnlikeTrack	{speaker} unlike
+UnlikeTrack	unlike song on speaker {speaker}
+UnlikeTrack	unlike song in speaker {speaker}
+UnlikeTrack	unlike song on {speaker}
+UnlikeTrack	unlike song in {speaker}
+UnlikeTrack	unlike track on speaker {speaker}
+UnlikeTrack	unlike track in speaker {speaker}
+UnlikeTrack	unlike track on {speaker}
+UnlikeTrack	unlike track in {speaker}
+UnlikeTrack	unlike song playing on speaker {speaker}
+UnlikeTrack	unlike song playing in speaker {speaker}
+UnlikeTrack	unlike song playing on {speaker}
+UnlikeTrack	unlike song playing in {speaker}
+UnlikeTrack	unlike track playing on speaker {speaker}
+UnlikeTrack	unlike track playing in speaker {speaker}
+UnlikeTrack	unlike track playing on {speaker}
+UnlikeTrack	unlike track playing in {speaker}
+UnlikeTrack	speaker {speaker} dislike track
+UnlikeTrack	speaker {speaker} dislike song
+UnlikeTrack	speaker {speaker} dislike
+UnlikeTrack	{speaker} dislike track
+UnlikeTrack	{speaker} dislike song
+UnlikeTrack	{speaker} dislike
+UnlikeTrack	dislike song on speaker {speaker}
+UnlikeTrack	dislike song in speaker {speaker}
+UnlikeTrack	dislike song on {speaker}
+UnlikeTrack	dislike song in {speaker}
+UnlikeTrack	dislike track on speaker {speaker}
+UnlikeTrack	dislike track in speaker {speaker}
+UnlikeTrack	dislike track on {speaker}
+UnlikeTrack	dislike track in {speaker}
+UnlikeTrack	dislike song playing on speaker {speaker}
+UnlikeTrack	dislike song playing in speaker {speaker}
+UnlikeTrack	dislike song playing on {speaker}
+UnlikeTrack	dislike song playing in {speaker}
+UnlikeTrack	dislike track playing on speaker {speaker}
+UnlikeTrack	dislike track playing in speaker {speaker}
+UnlikeTrack	dislike track playing on {speaker}
+UnlikeTrack	dislike track playing in {speaker}
+UnlikeTrack	speaker {speaker} thumbs down track
+UnlikeTrack	speaker {speaker} thumbs down song
+UnlikeTrack	speaker {speaker} thumbs down
+UnlikeTrack	{speaker} thumbs down track
+UnlikeTrack	{speaker} thumbs down song
+UnlikeTrack	{speaker} thumbs down
+UnlikeTrack	thumbs down track playing on speaker {speaker}
+UnlikeTrack	thumbs down track playing in speaker {speaker}
+UnlikeTrack	thumbs down track playing on {speaker}
+UnlikeTrack	thumbs down track playing in {speaker}
+UnlikeTrack	thumbs down to track playing on speaker {speaker}
+UnlikeTrack	thumbs down to track playing in speaker {speaker}
+UnlikeTrack	thumbs down to track playing on {speaker}
+UnlikeTrack	thumbs down to track playing in {speaker}
+UnlikeTrack	thumbs down song playing on speaker {speaker}
+UnlikeTrack	thumbs down song playing in speaker {speaker}
+UnlikeTrack	thumbs down song playing on {speaker}
+UnlikeTrack	thumbs down song playing in {speaker}
+UnlikeTrack	thumbs down to song playing on speaker {speaker}
+UnlikeTrack	thumbs down to song playing in speaker {speaker}
+UnlikeTrack	thumbs down to song playing on {speaker}
+UnlikeTrack	thumbs down to song playing in {speaker}
+
+
+
 intent to name custom preset item name
 intent to add speaker to zone
 intent to remove speaker from zone
 intent use bluetooth
 intent use aux in
+just "increase volume" without specifying amount - default 10
+"decrease volume"
+pause
+stop
+resume

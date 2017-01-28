@@ -80,7 +80,7 @@ namespace SoundTouchAlexaLambda
 
         private async Task<string> GetPresetItemName(SoundTouchSpeakerMetaData targetSpeaker, int presetNumber, ILambdaLogger log)
         {
-            log.LogLine($"Getting Item Name for speaker {targetSpeaker.SpeakerName}, preset {presetNumber}");
+            log.LogLine($"Getting Preset Item Name for preset {presetNumber}");
             if (presetNumber >= 1 && presetNumber <= 6)
             {
                 HttpClient httpClient = GetHttpClient(targetSpeaker);
@@ -393,28 +393,53 @@ namespace SoundTouchAlexaLambda
 
         private async Task<IEnumerable<string>> GetStatus(SoundTouchSpeakerMetaData targetSpeaker, ILambdaLogger log)
         {
+            log.LogLine($"Getting speaker status for {targetSpeaker.SpeakerName}");
             List<string> statusStrings = new List<string>();
             HttpClient httpClient = GetHttpClient(targetSpeaker);
 
             string action = "now_playing";
             string nowPlayingResponseString = await httpClient.GetStringAsync(action);
+            log.LogLine($"now playing response string={nowPlayingResponseString}");
             //TODO
             var nowPlayingResponseXML = System.Xml.Linq.XDocument.Parse(nowPlayingResponseString);
+            log.LogLine("phase 1");
             var nowPlayingTag = (from t in nowPlayingResponseXML.Descendants("nowPlaying") select t)?.First();
-            var contentItemTag = (from t in nowPlayingTag?.Descendants("contentItem") select t)?.First();
-            var itemNameTag = (from t in contentItemTag?.Descendants("itemName") select t)?.First();
+            log.LogLine("phase 2");
 
-            var playStatusTag = (from t in nowPlayingResponseXML.Descendants("playStatus") select t)?.First();
+            var contentItemTag = (from t in nowPlayingTag?.Descendants("ContentItem") select t)?.First();
+            log.LogLine("phase 3");
+            log.LogLine($"phase 3 contentItemTag {contentItemTag}");
+            log.LogLine($"phase 3 contentItemTagDescendants {contentItemTag.Descendants()}");
+            log.LogLine($"phase 3 contentItemTagDescendants Count {contentItemTag.Descendants().Count()}");
+            log.LogLine($"phase 3 contentItemTagDescendants Where clause applied {contentItemTag.Descendants().Where(y => y.Name == "itemName")}");
+            log.LogLine($"phase 3 contentItemTagDescendants Where clause applied with count{contentItemTag.Descendants().Where(y => y.Name == "itemName").Count()}");
+
+            //var itemNameTag = (from t in contentItemTag?.Descendants("itemName") select t)?.First();
+            var itemNameTag = contentItemTag?.Descendants()?.Where(y => y.Name == "itemName")?.FirstOrDefault();
+            log.LogLine("phase 4");
+            //log.LogLine($"itenNameTag = {itemNameTag.Name}");
+
+            //var playStatusTag = (from t in nowPlayingResponseXML.Descendants("playStatus") select t)?.First();
+            var playStatusTag = nowPlayingTag?.Descendants()?.Where(y => y.Name == "playStatus")?.FirstOrDefault();
+            log.LogLine("phase 5");
 
             if ((nowPlayingTag?.Attributes().Where(y => y.Name == "source")?.First()?.Value == "STANDBY"))
             {
+                log.LogLine("phase 6A");
+
                 statusStrings.Add($"Power is off");
+                log.LogLine("phase 6B");
+
             }
             else
             {
+                log.LogLine("phase 7");
+                log.LogLine($"play status tag is {playStatusTag}");
+
                 switch (playStatusTag.Value)
                 {
                     case "PLAY_STATE":
+                        log.LogLine("phase PLAY_STATE");
 
                         Task<int> volumeTask = GetCurrentVolume(targetSpeaker, log);
 
@@ -425,21 +450,33 @@ namespace SoundTouchAlexaLambda
                         switch (source)
                         {
                             case "AUX":
+                                log.LogLine("phase PLAY_STATE AUX");
+
                                 sourceString = "Auxiliary Input";
                                 break;
                             case "PANDORA":
+                                log.LogLine("phase PLAY_STATE PANDORA");
+
                                 sourceString = "Pandora for user " + sourceAccount.Replace("@", " at ").Replace(".", " dot ");
                                 break;
                             case "IHEART":
+                                log.LogLine("phase PLAY_STATE IHEART");
+
                                 sourceString = "I Heart Radio for user " + sourceAccount.Replace("@", " at ").Replace(".", " dot ");
                                 break;
                             case "AMAZON":
+                                log.LogLine("phase PLAY_STATE AMAZON");
+
                                 sourceString = "Amazon Music for user " + sourceAccount.Replace("@", " at ").Replace(".", " dot ");
                                 break;
                             case "UPNP":
+                                log.LogLine("phase PLAY_STATE UPNP");
+
                                 sourceString = "You Pea N Pea";
                                 break;
                             case "STORED_MUSIC":
+                                log.LogLine("phase PLAY_STATE STORED MUSIC");
+
                                 httpClient = GetHttpClient(targetSpeaker);
                                 action = "sources";
                                 string sourcesResponseString = await httpClient.GetStringAsync(action);
@@ -447,43 +484,73 @@ namespace SoundTouchAlexaLambda
                                 var sourcesResponseXML = System.Xml.Linq.XDocument.Parse(sourcesResponseString);
                                 var sourceItems = sourcesResponseXML.Descendants().Where(y => y.Name == "sourceItem");
                                 var sourceItem = sourceItems.Where(y => y.Attributes().Any(z => z.Name == "source" && z.Value == "STORED_MUSIC") && y.Attributes().Any(z => z.Name == "sourceAccount" && z.Value == sourceAccount))?.First();
-                                sourceString = sourceItem.Value;
+                                sourceString = sourceItem.Value.Replace("_", " ");
                                 break;
                             default:
+                                log.LogLine("phase PLAY_STATE Default");
+
                                 sourceString = (source ?? "unspecified").Replace("_", " ");
                                 break;
                         }
-                        statusStrings.Add($"Playing {itemNameTag.Value ?? "unknown item"} from {(nowPlayingTag?.Attributes().Where(y => y.Name == "source")?.First()?.Value) ?? "unknown source"}.");
+                        log.LogLine("phase 8");
 
+                        //statusStrings.Add($"Playing {itemNameTag.Value ?? "unknown item"} from {(nowPlayingTag?.Attributes().Where(y => y.Name == "source")?.First()?.Value) ?? "unknown source"}");
+                        statusStrings.Add($"Playing {itemNameTag.Value ?? "unknown item"} from {sourceString ?? "unknown source"}");
 
-                        var artistTag = (from t in nowPlayingResponseXML.Descendants("artist") select t)?.First();
-                        var trackTag = (from t in nowPlayingResponseXML.Descendants("track") select t)?.First();
-                        var albumTag = (from t in nowPlayingResponseXML.Descendants("album") select t)?.First();
+                        log.LogLine("phase 9");
+
+                        var artistTag = (from t in nowPlayingResponseXML.Descendants("artist") select t)?.FirstOrDefault();
+                        log.LogLine("phase 10");
+
+                        var trackTag = (from t in nowPlayingResponseXML.Descendants("track") select t)?.FirstOrDefault();
+                        log.LogLine("phase 11");
+
+                        var albumTag = (from t in nowPlayingResponseXML.Descendants("album") select t)?.FirstOrDefault();
+                        log.LogLine("phase 12");
 
                         statusStrings.Add($"This is {trackTag?.Value ?? "unknown track"} by {artistTag?.Value ?? "unknown artist"} from {albumTag?.Value ?? "unknown album"}");
+                        log.LogLine("phase 13");
 
-                        var shuffleSettingTag = (from t in nowPlayingResponseXML.Descendants("shuffleSetting") select t)?.First();
-                        var repeatSettingTag = (from t in nowPlayingResponseXML.Descendants("repeatSetting") select t)?.First();
+                        var shuffleSettingTag = (from t in nowPlayingResponseXML.Descendants("shuffleSetting") select t)?.FirstOrDefault();
+                        log.LogLine("phase 14");
+
+                        var repeatSettingTag = (from t in nowPlayingResponseXML.Descendants("repeatSetting") select t)?.FirstOrDefault();
+                        log.LogLine("phase 15");
+                        log.LogLine($"phase 15 repeat setting tag is {repeatSettingTag}");
 
                         string shuffleSetting = "not applicable or unknown";
+                        log.LogLine("phase 16");
+
                         if (shuffleSettingTag?.Value == "SHUFFLE_OFF") { shuffleSetting = "off"; }
                         if (shuffleSettingTag?.Value == "SHUFFLE_ON") { shuffleSetting = "on"; }
 
                         statusStrings.Add($"Shuffle is {shuffleSetting}");
+                        log.LogLine("phase 17");
 
                         string repeatSetting = "not applicable or unknown";
-                        if (repeatSettingTag?.Value == "REPEATE_OFF") { shuffleSetting = "off"; }
-                        if (repeatSettingTag?.Value == "REPEAT_ALL") { shuffleSetting = "set to all tracks"; }
-                        if (repeatSettingTag?.Value == "REPEAT_ONE") { shuffleSetting = "set to single track"; }
+                        if (repeatSettingTag?.Value == "REPEAT_OFF") { repeatSetting = "off"; }
+                        if (repeatSettingTag?.Value == "REPEAT_ALL") { repeatSetting = "set to all tracks"; }
+                        if (repeatSettingTag?.Value == "REPEAT_ONE") { repeatSetting = "set to single track"; }
+                        log.LogLine("phase 18");
 
                         statusStrings.Add($"Repeat is  {repeatSetting}");
+                        log.LogLine("phase 19");
+
                         volumeTask.Wait();
+                        log.LogLine("phase 20");
+
                         statusStrings.Add($"Volume level is {volumeTask.Result} of one hundred");
+                        log.LogLine("phase 21");
+
                         break;
                     case "PAUSE_STATE":
+                        log.LogLine("phase PAUSE_STATE");
+
                         statusStrings.Add($"Playback is paused");
                         break;
                     case "STOP_STATE":
+                        log.LogLine("phase STOP_STATE");
+
                         statusStrings.Add($"Playback is stopped");
                         break;
                 }
@@ -501,6 +568,9 @@ namespace SoundTouchAlexaLambda
 
             return skillResponse;
         }
+
+        
+
         /// <summary>
         /// A simple function that takes a string and does a ToUpper
         /// </summary>
@@ -522,6 +592,9 @@ namespace SoundTouchAlexaLambda
 
             List<SoundTouchSpeakerMetaData> speakers = GetSpeakerMetaData(log);
             log.LogLine($"speaker metadata retrieved! count= {speakers.Count()}");
+
+
+
             /*
             foreach (var speaker in speakers)
             {
@@ -545,20 +618,23 @@ namespace SoundTouchAlexaLambda
                 HttpClient httpClient = new HttpClient();
                 // intent request, process the intent
                 log.LogLine($"Intent Requested {input.Request.Intent.Name}");
-
-
-                log.LogLine("speaker name string came through as:" + input.Request.Intent.Slots["speaker"].Value);
-
-                string targetSpeakerName = input.Request.Intent.Slots["speaker"].Value;
-                IEnumerable<SoundTouchSpeakerMetaData> candidateSpeakers = speakers.Where(x => x.SpeakerName.ToLower() == targetSpeakerName.ToLower());
-                SoundTouchSpeakerMetaData targetSpeaker = candidateSpeakers.FirstOrDefault();
-                if (targetSpeaker == null)
+                string targetSpeakerName;
+                SoundTouchSpeakerMetaData targetSpeaker = new SoundTouchSpeakerMetaData();
+                if (input.Request.Intent.Name != "DescribePreset")
                 {
-                    log.LogLine("could not resolve target speaker");
-                    innerResponse = new PlainTextOutputSpeech();
-                    (innerResponse as PlainTextOutputSpeech).Text = "You asked to perform this action on a speaker named " + targetSpeakerName + " but I couldn't find a speaker with that name";
-                    return BuildResponse(innerResponse);
+                    log.LogLine("speaker name string came through as:" + input.Request.Intent.Slots["speaker"].Value);
 
+                    targetSpeakerName = input.Request.Intent.Slots["speaker"].Value;
+                    IEnumerable<SoundTouchSpeakerMetaData> candidateSpeakers = speakers.Where(x => x.SpeakerName.ToLower() == targetSpeakerName.ToLower());
+                    targetSpeaker = candidateSpeakers.FirstOrDefault();
+                    if (targetSpeaker == null)
+                    {
+                        log.LogLine("could not resolve target speaker");
+                        innerResponse = new PlainTextOutputSpeech();
+                        (innerResponse as PlainTextOutputSpeech).Text = "You asked to perform this action on a speaker named " + targetSpeakerName + " but I couldn't find a speaker with that name";
+                        return BuildResponse(innerResponse);
+
+                    }
                 }
 
 
@@ -687,11 +763,11 @@ namespace SoundTouchAlexaLambda
                         break;
                     case "DescribePreset":
                         presetNumber = Convert.ToInt32(input.Request.Intent.Slots["presetNumber"].Value);
-                        Task<string> itemNameTask = GetPresetItemName(targetSpeaker, presetNumber, log);
+                        Task<string> itemNameTask = GetPresetItemName(speakers.ElementAt(0), presetNumber, log);
                         itemNameTask.Wait();
                         string itemName = itemNameTask.Result;
                         innerResponse = new PlainTextOutputSpeech();
-                        (innerResponse as PlainTextOutputSpeech).Text = $"Preset {presetNumber} on speaker {targetSpeaker.SpeakerName} is {itemName}";
+                        (innerResponse as PlainTextOutputSpeech).Text = $"Preset {presetNumber} is {itemName}";
                         break;
                     case "DescribeVolume":
                         Task<int> getVolumeTask = GetCurrentVolume(targetSpeaker, log);
@@ -705,7 +781,17 @@ namespace SoundTouchAlexaLambda
                         statusMessagesTask.Wait();
                         IEnumerable<string> statusMessages = statusMessagesTask.Result;
                         innerResponse = new PlainTextOutputSpeech();
-                        (innerResponse as PlainTextOutputSpeech).Text = $"Status of {targetSpeaker.SpeakerName} is. {String.Join(".  ", statusMessages)}";
+                        (innerResponse as PlainTextOutputSpeech).Text = $"Status of {targetSpeaker.SpeakerName} is {String.Join(".  ", statusMessages)}";
+                        break;
+                    case "LikeTrack":
+                        PressAndReleaseKey(targetSpeaker, "THUMBS_UP");
+                        innerResponse = new PlainTextOutputSpeech();
+                        (innerResponse as PlainTextOutputSpeech).Text = $"Great choice!  I gave this track a big thumbs up for you.";
+                        break;
+                    case "UnlikeTrack":
+                        PressAndReleaseKey(targetSpeaker, "THUMBS_DOWN");
+                        innerResponse = new PlainTextOutputSpeech();
+                        (innerResponse as PlainTextOutputSpeech).Text = $"Sorry you didn't like it.  I gave this track a thumbs down for you.";
                         break;
 
                     default:

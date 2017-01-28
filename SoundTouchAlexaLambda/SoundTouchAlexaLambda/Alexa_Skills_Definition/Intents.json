@@ -140,7 +140,26 @@
           "type": "SPEAKER_NAME"
         }
       ]
+    },
+    {
+      "intent": "LikeTrack",
+      "slots": [
+        {
+          "name": "speaker",
+          "type": "SPEAKER_NAME"
+        }
+      ]
+    },
+    {
+      "intent": "UnlikeTrack",
+      "slots": [
+        {
+          "name": "speaker",
+          "type": "SPEAKER_NAME"
+        }
+      ]
     }
+
 
 
   ]
